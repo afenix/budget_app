@@ -30,4 +30,18 @@ describe(Expense) do
     end
   end
 
+  describe("#add_category") do
+    it("adds a category to an expense") do
+      expense = Expense.new({:id => 1, :name => "Barlow Tavern", :cost => 34.56, :timestamp => "2009-05-17 00:00:00", :description => "Good times"})
+      expense.save()
+      category = Category.new({:id => 2, :name => "Entertainment"})
+      category.save()
+
+      expense.add_category(category)
+
+
+      expect(expense.list_categories()).to(eq(["Entertainment"]))
+    end
+  end
+
 end

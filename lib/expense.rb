@@ -29,6 +29,29 @@ attr_reader(:id, :name, :cost, :timestamp, :description)
     @id = result.first().fetch("id").to_i()
   end
 
+  define_method(:add_category) do |category|
+    puts(@id)
+    result = DB.exec("INSERT INTO expense_categories (expense_id, category_id) VALUES (#{@id}, #{category.id()});")
+    #@id = result.first().fetch("id").to_i()
+  end
+
+  define_method(:list_categories) do
+    returned_categories = DB.exec("
+    SELECT categories.* FROM
+    expenses JOIN expense_categories ON (expenses.id = expense_categories.expense_id)
+    JOIN categories ON (expense_categories.category_id = categories.id)
+    WHERE expenses.id = #{self.id()};")
+
+    binding.pry
+    categories = []
+    returned_categories.each() do |category|
+      categories = categories.push(category.fetch("name"))
+    end
+    categories
+   end
+
+
+
   define_method(:==) do |other_name|
     self.name().==(other_name.name()) && self.id().==(other_name.id())
   end
