@@ -3,7 +3,7 @@ require('pg')
 require('pry')
 require('expense')
 require('category')
-#require('expense-category')
+require('expense_category')
 
 DB = PG.connect({:dbname => "budget_test"})
 

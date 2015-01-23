@@ -16,9 +16,9 @@ describe(Category) do
 
   describe("#save") do
     it("saves a particular category to table 'categories'") do
-      test_expense = Category.new({:id => 1, :name => "Entertainment"})
-      test_expense.save()
-      expect(Category.all).to(eq([test_expense]))
+      test_category = Category.new({:id => 1, :name => "Entertainment"})
+      test_category.save()
+      expect(Category.all).to(eq([test_category]))
     end
   end
 
